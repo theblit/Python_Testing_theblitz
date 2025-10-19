@@ -12,5 +12,14 @@
     {   "name":"She Lifts",
         "email": "kate@shelifts.co.uk",
         "points":"12"
+    },
+    {   "name":"Bulls chicago",
+        "email": "bulls@chicago.co.uk",
+        "points":"20"
+    },
+    { 
+          "name":"Denver Nugget",
+        "email": "Denver@Nugget.co.uk",
+        "points":"31"
     }
 ]}

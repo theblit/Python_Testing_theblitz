@@ -1,3 +1,49 @@
+# Mise en place et exécution de l'application Flask
+
+Instructions rapides pour Windows PowerShell (v5.1). Ces scripts supposent que `python` est disponible dans votre PATH.
+
+1) Créer l'environnement et installer les dépendances
+
+Ouvrez PowerShell dans le dossier du projet et lancez :
+
+```powershell
+.\setup_env.ps1
+```
+
+Le script crée un environnement virtuel `.venv`, active l'environnement et installe les paquets listés dans `requirements.txt`. Il crée aussi un fichier `.env` avec `FLASK_APP=server.py` et `FLASK_ENV=development` si aucun `.env` n'existe.
+
+Si votre ExecutionPolicy empêche l'exécution des scripts, exécutez PowerShell en tant qu'administrateur et lancez :
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+2) Lancer l'application
+
+Après avoir exécuté `setup_env.ps1`, démarrez le serveur Flask :
+
+```powershell
+.\start_flask.ps1
+```
+
+Le serveur écoute par défaut sur `http://127.0.0.1:5000`.
+
+3) Commandes manuelles (si vous préférez)
+
+```powershell
+python -m venv .venv
+. .\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+$env:FLASK_APP = 'server.py'
+$env:FLASK_ENV = 'development'
+flask run
+```
+
+4) Remarques
+
+- Le projet actuel contient `server.py` comme point d'entrée. Si vous changez le nom du fichier, mettez à jour `.env` ou la variable d'environnement `FLASK_APP`.
+- Les scripts sont destinés pour un usage en développement uniquement.
 # Intro
 ```
 Hey,

@@ -6,11 +6,40 @@
 </head>
 <body>
     <h1>Welcome to the GUDLFT Registration Portal!</h1>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
     Please enter your secretary email to continue:
     <form action="showSummary" method="post">
         <label for="email">Email:</label>
-        <input type="email" name="email" id=""/>
+        <input type="email" name="email" id="email"/>
         <button type="submit">Enter</button>
     </form>
+
+    <hr>
+    
+    <h2>Clubs et leurs points</h2>
+    {% for club in clubs %}
+        <p>
+            <strong>{{ club.name }}</strong> - Points: {{ club.points }}
+        </p>
+    {% endfor %}
+
+    <hr>
+    
+    <h2>Compétitions disponibles</h2>
+    {% for comp in competitions %}
+        <p>
+            <strong>{{ comp.name }}</strong><br>
+            Date: {{ comp.date }}<br>
+            Places disponibles: {{ comp.numberOfPlaces }}
+        </p>
+    {% endfor %}
 </body>
 </html>
