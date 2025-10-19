@@ -29,6 +29,15 @@ def index():
     print("=== Route index appelée ===")
     return render_template('index.html', clubs=clubs,)
 
+#route pour afficher la page des points
+@app.route('/points')
+def points():
+    return render_template('points.html', clubs=clubs)
+
+
+
+
+
 #permet d'afficher le résumé après connexion
 @app.route('/showSummary', methods=['POST'])
 def showSummary():
@@ -50,28 +59,7 @@ def showSummary():
     print(f"Club sélectionné: {club['name']}")
     return render_template('welcome.html', club=club, competitions=competitions)
 
-#route pour afficher la page de réservation
-@app.route('/book/<competition>/<club>')
-def book(competition, club):
-    print(f"=== Route book appelée: {competition} / {club} ===")
-    foundClub = [c for c in clubs if c['name'] == club]
-    foundCompetition = [c for c in competitions if c['name'] == competition]
-    
-    # Vérifier si le club et la compétition existent
-    if not foundClub or not foundCompetition:
-        print("ERREUR: Club ou compétition introuvable")
-        flash("Something went wrong-please try again")
-        return redirect(url_for('index'))
-    
-    # Vérifier si la compétition est passée
-    competition_date = datetime.strptime(foundCompetition[0]['date'], '%Y-%m-%d %H:%M:%S')
-    if competition_date < datetime.now():
-        print(f"ERREUR: Compétition passée ({foundCompetition[0]['date']})")
-        flash("Impossible de réserver pour une compétition passée")
-        return render_template('welcome.html', club=foundClub[0], competitions=competitions)
-    
-    # Afficher la page de réservation
-    return render_template('booking.html', club=foundClub[0], competition=foundCompetition[0])
+
 
 
 
@@ -121,6 +109,32 @@ def purchasePlaces():
 def logout():
     print("=== Route logout appelée ===")
     return redirect(url_for('index'))
+
+#route pour afficher la page de réservation
+@app.route('/book/<competition>/<club>')
+def book(competition, club):
+    print(f"=== Route book appelée: {competition} / {club} ===")
+    foundClub = [c for c in clubs if c['name'] == club]
+    foundCompetition = [c for c in competitions if c['name'] == competition]
+    
+    # Vérifier si le club et la compétition existent
+    if not foundClub or not foundCompetition:
+        print("ERREUR: Club ou compétition introuvable")
+        flash("Something went wrong-please try again")
+        return redirect(url_for('index'))
+    
+    # Vérifier si la compétition est passée
+    competition_date = datetime.strptime(foundCompetition[0]['date'], '%Y-%m-%d %H:%M:%S')
+    if competition_date < datetime.now():
+        print(f"ERREUR: Compétition passée ({foundCompetition[0]['date']})")
+        flash("Impossible de réserver pour une compétition passée")
+        return render_template('welcome.html', club=foundClub[0], competitions=competitions)
+    
+    # Afficher la page de réservation
+    return render_template('booking.html', club=foundClub[0], competition=foundCompetition[0])
+
+
+
 
 #point d'entrée de l'application
 if __name__ == "__main__": 
