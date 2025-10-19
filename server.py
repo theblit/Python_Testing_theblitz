@@ -23,11 +23,11 @@ competitions = loadCompetitions()
 clubs = loadClubs()
 
 
-#permet d'importer les données des fichiers JSON
+#permet d'importer les données des fichiers clubs
 @app.route('/')
 def index():
     print("=== Route index appelée ===")
-    return render_template('index.html', competitions=competitions, clubs=clubs)
+    return render_template('index.html', clubs=clubs,)
 
 #permet d'afficher le résumé après connexion
 @app.route('/showSummary', methods=['POST'])
