@@ -19,6 +19,16 @@
             "name": "summercup",
             "date": "2020-10-22 13:30:00",
             "numberOfPlaces": "13"
+        },
+        {
+            "name": "PremiereLeague",
+            "date": "2027-10-22 13:30:00",
+            "numberOfPlaces": "21"
+        },
+        {
+            "name": "Bundesliga",
+            "date": "2028-10-22 13:30:00",
+            "numberOfPlaces": "15"
         }
     ]
 }
